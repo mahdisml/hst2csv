@@ -134,14 +134,14 @@ func ParseHistoryOld(file *os.File) (hst HistoricalBytes) {
 	return
 }
 
-func CreateCsvFile(string ArgsFileName) {
-	var string FileName = ""
-	var string CsvFile = ""
-	const string Directory = "/src/csv/"
-	FileName  = ArgsFileName
-	CsvFile := strings.Replace(FileName, ".hst", ".csv", 1)
+func CreateCsvFile(args_file_name String()) Strings() string {
+	var file_name String()
+	var csv_file String()
+	const csv_dir = "/src/csv/"
+	file_name  = args_file_name
+	CsvFile := strings.Replace(file_name, ".hst", ".csv", 1)
 
-	return Directory + CsvFile
+	return csv_dir + csv_file
 }
 
 func main() {
