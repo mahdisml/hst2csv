@@ -134,7 +134,7 @@ func ParseHistoryOld(file *os.File) (hst HistoricalBytes) {
 	return
 }
 
-func CreateCsvFile(args_file_name string) String() string {
+func createCsvName(args_file_name string) String() string {
 	var file_name String()
 	var csv_file String()
 	const csv_dir := "/src/csv/"
@@ -150,7 +150,7 @@ func main() {
 	var header HeaderBytes
 	var history HistoricalBytes
 	in_file, in_err := os.Open(os.Args[1])
-	out_file, out_err := os.Create(CreateCsvFile(os.Args[1]))
+	out_file, out_err := os.Create(createCsvName(os.Args[1]))
 	if in_err != nil {
 		fmt.Println(in_err)
 		return
