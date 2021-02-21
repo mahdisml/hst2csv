@@ -141,7 +141,9 @@ func CreateCsvFile(args_file_name String()) String() string {
 	file_name  = args_file_name
 	csv_file := strings.Replace(file_name, ".hst", ".csv", 1)
 
-	return csv_dir + csv_file
+	return fmt.Sprintf(`"%s + %s"`, 
+		   csv_dir, csv_file,
+  	)
 }
 
 func main() {
