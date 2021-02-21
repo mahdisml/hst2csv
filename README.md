@@ -5,8 +5,8 @@ Convert .hst file to OHLCV formatted CSV
 ## Installation
 
 ```
-go get github.com/miiton/hst2csv
-go install github.com/miiton/hst2csv
+go get github.com/intellidrone/hst2csv
+go install github.com/intellidrone/hst2csv
 ```
 
 ## Usage
