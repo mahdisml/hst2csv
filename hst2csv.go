@@ -156,6 +156,7 @@ func main() {
 	var history HistoricalBytes
 	var csv CsvFileBundle
 	var csvf string
+	var tempstr string
 	in_file, in_err := os.Open(os.Args[1])
 	csv = createCsvFile(os.Args[1])
 	csvf = `csv.Dir + csv.File`
@@ -180,7 +181,6 @@ func main() {
 		for {
 			history = ParseHistoryOld(in_file)
 			//fmt.Println(history)
-			var temptstr string
 			tempstr = string(history)
 			out_file.WriteString(tempstr)
 			if out_err != nil {
@@ -192,7 +192,6 @@ func main() {
 		for {
 			history = ParseHistory(in_file)
 			// fmt.Println(history)
-			var tempstr string
 			tempstr = string(history)
 			out_file.WriteString(tempstr)
 			if err != nil {
