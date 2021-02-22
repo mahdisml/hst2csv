@@ -50,12 +50,6 @@ func (h HistoricalBytes) String() string {
 	)
 }
 
-func (c CsvFileBundle) String() string {
-	return fmt.Sprintf(`"%s" + "%s"`,
-			c.Dir, c.File,
-	)
-}
-
 func readInt32(file *os.File, byteNum int32) (ret int32) {
 	b := make([]byte, byteNum)
 	buf := bytes.NewBuffer(b)
