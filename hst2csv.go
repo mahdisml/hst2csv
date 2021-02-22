@@ -154,10 +154,12 @@ func createCsvFile(args_file_name string) (csv CsvFileBundle) {
 func main() {
 	var header HeaderBytes
 	var history HistoricalBytes
-	var csvf CsvFileBundle
+	var csv CsvFileBundle
+	var csvf string
 	in_file, in_err := os.Open(os.Args[1])
-	csvf = createCsvFile(os.Args[1])
-	out_file, out_err := os.Create(`csvf.Dir + csvf.File`)
+	csv = createCsvFile(os.Args[1])
+	csfv = `csv.Dir + csv.File`
+	out_file, out_err := os.Create()
 	if in_err != nil {
 		fmt.Println(in_err)
 		return
