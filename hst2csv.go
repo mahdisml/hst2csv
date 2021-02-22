@@ -157,7 +157,7 @@ func main() {
 	var csvf CsvFileBundle
 	in_file, in_err := os.Open(os.Args[1])
 	csvf = createCsvFile(os.Args[1])
-	out_file, out_err := os.Create(csvf.Dir + csvf.File)
+	out_file, out_err := os.Create(`csvf.Dir + csvf.File`)
 	if in_err != nil {
 		fmt.Println(in_err)
 		return
