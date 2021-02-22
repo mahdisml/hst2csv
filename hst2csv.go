@@ -180,7 +180,7 @@ func main() {
 		for {
 			history = ParseHistoryOld(in_file)
 			//fmt.Println(history)
-			out_file.WriteString(history)
+			out_file.WriteString(string(history))
 			if out_err != nil {
 				fmt.Println(out_err)
 				return
@@ -190,7 +190,7 @@ func main() {
 		for {
 			history = ParseHistory(in_file)
 			// fmt.Println(history)
-			out_file.WriteString(history)
+			out_file.WriteString(string(history))
 			if err != nil {
 				fmt.Println(out_err)
 				return
