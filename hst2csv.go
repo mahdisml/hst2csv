@@ -157,6 +157,7 @@ func main() {
 	var csv CsvFileBundle
 	var csvf string
 	var tempstr string
+	
 	in_file, in_err := os.Open(os.Args[1])
 	csv = createCsvFile(os.Args[1])
 	csvf = `csv.Dir + csv.File`
