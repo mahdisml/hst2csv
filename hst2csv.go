@@ -154,7 +154,7 @@ func main() {
 
 	in_file, in_err := os.Open(os.Args[1])
 	csv = createCsvFile(os.Args[1])
-	csvf = fmt.Sprintf(`"%s""%s"`,
+	csvf = fmt.Sprintf(`%s%s`,
 		csv.Dir, csv.File,
 	)
 	out_file, out_err := os.Create(csvf)
