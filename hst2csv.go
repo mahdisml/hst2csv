@@ -159,7 +159,7 @@ func main() {
 	in_file, in_err := os.Open(os.Args[1])
 	csv = createCsvFile(os.Args[1])
 	csfv = `csv.Dir + csv.File`
-	out_file, out_err := os.Create()
+	out_file, out_err := os.Create(csvf)
 	if in_err != nil {
 		fmt.Println(in_err)
 		return
