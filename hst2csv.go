@@ -157,9 +157,6 @@ func main() {
 	csvf = fmt.Sprintf(`"%s""%s"`,
 		csv.Dir, csv.File,
 	)
-)
-	
-	`csv.Dir + csv.File`
 	out_file, out_err := os.Create(csvf)
 	if in_err != nil {
 		fmt.Println(in_err)
