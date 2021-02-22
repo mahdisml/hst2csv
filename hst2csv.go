@@ -147,7 +147,7 @@ func ParseHistoryOld(file *os.File) (hst HistoricalBytes) {
 func createCsvFile(args_file_name string) (csv CsvBundle) {
 	csv.Csv_Dir = "/src/csv/"
 	csv.File_Name = args_file_name
-	csv.Csv_File := strings.Replace(csv.File_Name, ".hst", ".csv", 1)
+	csv.Csv_File = strings.Replace(csv.File_Name, ".hst", ".csv", 1)
 	
 	return
 }
