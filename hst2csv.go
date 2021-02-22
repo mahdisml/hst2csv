@@ -134,9 +134,7 @@ func ParseHistory(file *os.File) (hst HistoricalBytes) {
 
 func ParseHistoryOld(file *os.File) (hst HistoricalBytes) {
 
-	hst.Time = strings.Replace(
-		time.Unix(int64(readInt32(file, 4)), 0).Format(time.RFC3339),
-		"+", "Z", 1)
+	hst.Time = strings.Replace(time.Unix(int64(readInt32(file, 4)), 0).Format(time.RFC3339), "+", "Z", 1)
 	hst.Open = readFloat64(file, 8)
 	hst.Low = readFloat64(file, 8)
 	hst.High = readFloat64(file, 8)
