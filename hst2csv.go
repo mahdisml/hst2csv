@@ -32,8 +32,8 @@ type HistoricalBytes struct {
 }
 
 type CsvBundle struct {
-	Csv_Dir	  string
-	Csv_File  string
+	Dir  string
+	File string
 }
 
 func (h HeaderBytes) String() string {
@@ -51,7 +51,7 @@ func (h HistoricalBytes) String() string {
 
 func (c CsvBundle) String() string {
 	return fmt.Sprintf(`"%s" + "%s"`, 
-	   c.Csv_Dir, c.Csv_File,
+	   c.Dir, c.File,
   	)
 }
 
@@ -144,8 +144,8 @@ func ParseHistoryOld(file *os.File) (hst HistoricalBytes) {
 }
 
 func createCsvFile(args_file_name string) (csv CsvBundle) {
-	csv.Csv_Dir = "/src/csv/"
-	csv.Csv_File = strings.Replace(args_file_name, ".hst", ".csv", 1)
+	csv.Dir = "/src/csv/"
+	csv.File = strings.Replace(args_file_name, ".hst", ".csv", 1)
 	
 	return
 }
