@@ -153,8 +153,10 @@ func createCsvFile(args_file_name string) (csv CsvFileBundle) {
 func main() {
 	var header HeaderBytes
 	var history HistoricalBytes
+	var csvf CsvFileBundle
 	in_file, in_err := os.Open(os.Args[1])
-	out_file, out_err := os.Create(createCsvFile(os.Args[1]))
+	csvf = createCsvFile(os.Args[1])
+	out_file, out_err := os.Create(csvf.Dir + csvf.File)
 	if in_err != nil {
 		fmt.Println(in_err)
 		return
