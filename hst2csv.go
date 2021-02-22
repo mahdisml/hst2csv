@@ -31,6 +31,11 @@ type HistoricalBytes struct {
 	Volume int32
 }
 
+type CsvFileBundle struct {
+	Dir	  string
+	File  string
+}
+
 func (h HeaderBytes) String() string {
 	return fmt.Sprintf(`"%d","%s","%s","%d","%d","%d","%d","%d"`,
 		h.Version, h.Copyright, h.Symbol, h.Period,
@@ -122,9 +127,7 @@ func ParseHistory(file *os.File) (hst HistoricalBytes) {
 
 func ParseHistoryOld(file *os.File) (hst HistoricalBytes) {
 
-	hst.Time = strings.Replace(
-		time.Unix(int64(readInt32(file, 4)), 0).Format(time.RFC3339),
-		"+", "Z", 1)
+	hst.Time = strings.Replace(time.Unix(int64(readInt32(file, 4)), 0).Format(time.RFC3339), "+", "Z", 1)
 	hst.Open = readFloat64(file, 8)
 	hst.Low = readFloat64(file, 8)
 	hst.High = readFloat64(file, 8)
@@ -134,22 +137,69 @@ func ParseHistoryOld(file *os.File) (hst HistoricalBytes) {
 	return
 }
 
+func createCsvFile(args_file_name string) (csv CsvFileBundle) {
+
+	csv.Dir = "/src/csv/"
+	csv.File = strings.Replace(args_file_name, ".hst", ".csv", 1)
+
+	return
+}
+
 func main() {
 	var header HeaderBytes
-	var history HistoricalBytes
-	file, _ := os.Open(os.Args[1])
-	defer file.Close()
+	var hst HistoricalBytes
+	var csv CsvFileBundle
+	var csvf string
+	var tempstr string
 
-	header = ParseHeader(file)
+	in_file, in_err := os.Open(os.Args[1])
+	csv = createCsvFile(os.Args[1])
+	csvf = fmt.Sprintf(`%s%s`,
+		csv.Dir, csv.File,
+	)
+	out_file, out_err := os.Create(csvf)
+	if in_err != nil {
+		fmt.Println(in_err)
+		return
+	}
+	if out_err != nil {
+		fmt.Println(out_err)
+		return
+	}
+
+	//defer in_file.Close()
+
+	header = ParseHeader(in_file)
+		if in_err != nil {
+		fmt.Println(in_err)
+		return
+	}
 	if header.Version < 401 {
 		for {
-			history = ParseHistoryOld(file)
-			fmt.Println(history)
+			hst = ParseHistoryOld(in_file)
+			tempstr = fmt.Sprintf(`"%s","%f","%f","%f","%f","%d"\n`,
+				hst.Time, hst.Open, hst.High, hst.Low, hst.Close, hst.Volume,
+			)
+			out_file.WriteString(tempstr)
+			if out_err != nil {
+				fmt.Println(out_err)
+				return
+			}
 		}
 	} else {
 		for {
-			history = ParseHistory(file)
-			fmt.Println(history)
+			hst = ParseHistory(in_file)
+			tempstr = fmt.Sprintf(`"%s","%f","%f","%f","%f","%d"\n`,
+				hst.Time, hst.Open, hst.High, hst.Low, hst.Close, hst.Volume,
+			)
+			out_file.WriteString(tempstr)
+			if out_err != nil {
+				fmt.Println(out_err)
+				return
+			}
 		}
 	}
+
+	defer in_file.Close()
+	defer out_file.Close()
 }
