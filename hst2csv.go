@@ -31,6 +31,12 @@ type HistoricalBytes struct {
 	Volume int32
 }
 
+type CsvBundle struct {
+	Csv_Dir	  string
+	File_Name string
+	Csv_File  string
+}
+
 func (h HeaderBytes) String() string {
 	return fmt.Sprintf(`"%d","%s","%s","%d","%d","%d","%d","%d"`,
 		h.Version, h.Copyright, h.Symbol, h.Period,
@@ -42,6 +48,12 @@ func (h HistoricalBytes) String() string {
 	return fmt.Sprintf(`"%s","%f","%f","%f","%f","%d"`,
 		h.Time, h.Open, h.High, h.Low, h.Close, h.Volume,
 	)
+}
+
+func (c CsvBundle) String() string {
+	return fmt.Sprintf(`"%s" + "%s"`, 
+	   c.Csv_Dir, c.Csv_File,
+  	)
 }
 
 func readInt32(file *os.File, byteNum int32) (ret int32) {
@@ -134,21 +146,19 @@ func ParseHistoryOld(file *os.File) (hst HistoricalBytes) {
 	return
 }
 
-func createCsvName(args_file_name string) String() string {
-	csv_dir = "/src/csv/"
-	file_name = args_file_name
-	csv_file := strings.Replace(file_name, ".hst", ".csv", 1)
-
-	return fmt.Sprintf(`"%s" + "%s"`, 
-		   csv_dir, csv_file,
-  	)
+func createCsvFile(args_file_name string) (csv CsvBundle) {
+	csv.Csv_Dir = "/src/csv/"
+	csv.File_Name = args_file_name
+	csv.Csv_File := strings.Replace(csv.File_Name, ".hst", ".csv", 1)
+	
+	return
 }
 
 func main() {
 	var header HeaderBytes
 	var history HistoricalBytes
 	in_file, in_err := os.Open(os.Args[1])
-	out_file, out_err := os.Create(createCsvName(os.Args[1]))
+	out_file, out_err := os.Create(createCsvFile(os.Args[1]))
 	if in_err != nil {
 		fmt.Println(in_err)
 		return
