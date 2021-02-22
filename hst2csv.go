@@ -9,6 +9,7 @@ import (
 	"os"
 	"strings"
 	"time"
+	"strconv"
 )
 
 type HeaderBytes struct {
@@ -153,7 +154,7 @@ func createCsvFile(args_file_name string) (csv CsvFileBundle) {
 
 func main() {
 	var header HeaderBytes
-	var history HistoricalBytes
+	var hst HistoricalBytes
 	var csv CsvFileBundle
 	var csvf string
 	var tempstr string
@@ -180,9 +181,10 @@ func main() {
 	}
 	if header.Version < 401 {
 		for {
-			history = ParseHistoryOld(in_file)
-			tempstr = fmt.Println(history)
-			//tempstr = string(history)
+			hst = ParseHistoryOld(in_file)
+			tempstr = fmt.Sprintf(`"%s","%f","%f","%f","%f","%d"`,
+				hst.Time, hst.Open, hst.High, hst.Low, hst.Close, hst.Volume,
+			)
 			out_file.WriteString(tempstr)
 			if out_err != nil {
 				fmt.Println(out_err)
@@ -191,9 +193,10 @@ func main() {
 		}
 	} else {
 		for {
-			history = ParseHistory(in_file)
-			tempstr = fmt.Println(history)
-			//tempstr = string(history)
+			hst = ParseHistory(in_file)
+			tempstr = fmt.Sprintf(`"%s","%f","%f","%f","%f","%d"`,
+				hst.Time, hst.Open, hst.High, hst.Low, hst.Close, hst.Volume,
+			)
 			out_file.WriteString(tempstr)
 			if out_err != nil {
 				fmt.Println(out_err)
