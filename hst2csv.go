@@ -170,9 +170,10 @@ func main() {
 	//defer in_file.Close()
 
 	hdr = ParseHeader(in_file)
-	hdr = fmt.Sprintf("%d,%s,%s,%d,%d,%d,%d,%d\n",
+	tempstr = fmt.Sprintf("%d,%s,%s,%d,%d,%d,%d,%d\n",
 		hdr.Version, hdr.Copyright, hdr.Symbol, hdr.Period, hdr.Digits, hdr.TimeSign, hdr.LastSync, hdr.Unused,
 	)
+	out_file.WriteString(tempstr)
 	if in_err != nil {
 		fmt.Println(in_err)
 			return
