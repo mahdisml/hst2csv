@@ -166,7 +166,6 @@ func main() {
 		fmt.Println(out_err)
 		return
 	}
-<<<<<<< HEAD
 
 	//defer in_file.Close()
 
@@ -179,17 +178,6 @@ func main() {
 			return
 	}
 	if hdr.Version < 401 {
-=======
-
-	//defer in_file.Close()
-
-	header = ParseHeader(in_file)
-		if in_err != nil {
-		fmt.Println(in_err)
-		return
-	}
-	if header.Version < 401 {
->>>>>>> 914c75ffc38f5736f6f24dae95e91f4501eb99a8
 		for {
 			hst = ParseHistoryOld(in_file)
 			tempstr = fmt.Sprintf("%s,%f,%f,%f,%f,%d\n",
@@ -217,8 +205,4 @@ func main() {
 
 	defer in_file.Close()
 	defer out_file.Close()
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 914c75ffc38f5736f6f24dae95e91f4501eb99a8
