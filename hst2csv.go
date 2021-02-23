@@ -146,7 +146,7 @@ func createCsvFile(args_file_name string) (csv CsvFileBundle) {
 }
 
 func main() {
-	var header HeaderBytes
+	var hdr HeaderBytes
 	var hst HistoricalBytes
 	var csv CsvFileBundle
 	var csvf string
