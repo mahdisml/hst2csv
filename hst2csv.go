@@ -177,7 +177,7 @@ func main() {
 	if header.Version < 401 {
 		for {
 			hst = ParseHistoryOld(in_file)
-			tempstr = fmt.Sprintf(string, "%s,%f,%f,%f,%f,%d\n",
+			tempstr = fmt.Sprintf("%s,%f,%f,%f,%f,%d\n",
 				hst.Time, hst.Open, hst.High, hst.Low, hst.Close, hst.Volume,
 			)
 			out_file.WriteString(tempstr)
@@ -189,7 +189,7 @@ func main() {
 	} else {
 		for {
 			hst = ParseHistory(in_file)
-			tempstr = fmt.Sprintf(string, "%s,%f,%f,%f,%f,%d\n",
+			tempstr = fmt.Sprintf("%s,%f,%f,%f,%f,%d\n",
 				hst.Time, hst.Open, hst.High, hst.Low, hst.Close, hst.Volume,
 			)
 			out_file.WriteString(tempstr)
