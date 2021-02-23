@@ -169,12 +169,15 @@ func main() {
 
 	//defer in_file.Close()
 
-	header = ParseHeader(in_file)
-		if in_err != nil {
+	hdr = ParseHeader(in_file)
+	hdr = fmt.Sprintf("%d,%s,%s,%d,%d,%d,%d,%d\n",
+		hdr.Version, hdr.Copyright, hdr.Symbol, hdr.Period, hdr.Digits, hdr.TimeSign, hdr.LastSync, hdr.Unused,
+	)
+	if in_err != nil {
 		fmt.Println(in_err)
-		return
+			return
 	}
-	if header.Version < 401 {
+	if hdr.Version < 401 {
 		for {
 			hst = ParseHistoryOld(in_file)
 			tempstr = fmt.Sprintf("%s,%f,%f,%f,%f,%d\n",
